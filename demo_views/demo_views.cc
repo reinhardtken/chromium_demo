@@ -83,6 +83,8 @@
 #include "ui/gfx/x/connection.h"  // nogncheck
 #endif
 
+#include "ui/base/win/scoped_ole_initializer.h"
+
 // Maintain the UI controls and web view for content shell
 class DemoViewsWidgetDelegateView : public views::WidgetDelegateView {
  public:
@@ -151,13 +153,16 @@ class InkView : public views::View {
  public:
   InkView() {
     path_.moveTo(0, 0);
-    paint_flags_.setColor(SK_ColorWHITE);
+    /*paint_flags_.setColor(SK_ColorWHITE);*/
+    paint_flags_.setColor(SK_ColorRED);
     paint_flags_.setStyle(cc::PaintFlags::Style::kStroke_Style);
     paint_flags_.setStrokeWidth(5);
   }
   void OnMouseMoved(const ui::MouseEvent& event) override {
     DLOG(INFO) << "OnMouseMoved()";
     path_.lineTo(event.x(), event.y());
+    rect_.push_back(
+        gfx::RectF(event.x(), event.y(), event.x() + 100, event.y() + 100));
     SchedulePaint();
   }
   void OnPaint(gfx::Canvas* canvas) override {
@@ -166,9 +171,13 @@ class InkView : public views::View {
     // canvas->DrawColor(SK_ColorGREEN);
     views::View::OnPaint(canvas);
     canvas->DrawPath(path_, paint_flags_);
+    for (auto const&  one : rect_) {
+      canvas->DrawRect(one, paint_flags_);
+    }
   }
 
   SkPath path_;
+  std::vector<gfx::RectF> rect_;
   cc::PaintFlags paint_flags_;
 };
 
@@ -179,6 +188,10 @@ int main(int argc, char** argv) {
   base::CommandLine::Init(argc, argv);
   // 设置日志格式
   logging::SetLogItems(true, true, true, false);
+
+  #if BUILDFLAG(IS_WIN)
+  ui::ScopedOleInitializer ole_initializer;
+#endif
 
 #if defined(OS_WIN)
   logging::LoggingSettings logging_setting;
@@ -200,12 +213,12 @@ int main(int argc, char** argv) {
   // 初始化mojo
   mojo::core::Init();
 
-  {
-    // Make Ozone run in single-process mode.
-    ui::OzonePlatform::InitParams params;
-    params.single_process = true;
-    ui::OzonePlatform::InitializeForGPU(params);
-  }
+  // {
+  //   // Make Ozone run in single-process mode.
+  //   ui::OzonePlatform::InitParams params;
+  //   params.single_process = true;
+  //   ui::OzonePlatform::InitializeForGPU(params);
+  // }
   // 加载相应平台的GL库及GL绑定
   gl::init::InitializeGLOneOff(0);
   LOG(INFO) << "GetGLImplementation: " << gl::GetGLImplementation();
