@@ -27,6 +27,7 @@ Demo list:
 1. [M120] `demo_tracing_console`: Demonstrate using Trace to output to the console;
 1. [M120] `demo_task_thread_pool`: Demonstrate the use of thread pool ThreadPool;
 1. [M120] `demo_task_executor`: Demonstrate using the message loop SingleThreadTaskExecutor;
+1. [M120] `demo_task_thread`: Demonstrates the use of a task in a new thread;
 1. [M120] `demo_callback`: Demo Bind&Callback related content；
 1. [M120] `demo_linktest`: Demonstrates incorrect use of gn causing link errors;
 1. [M120] `demo_mojo_single_process`: Demonstrate the use of the `mojo` library in a single process;
@@ -104,6 +105,10 @@ Public documents are in the [docs](./docs) directory, and other documents are in
 - Add a demo to demonstrate the principle of `tab capture api`;
 
 ## Changelog
+
+### 2024.6.23
+
+- Add demo_task_thread, which demonstrates the use of a task in a new thread;
 
 ### 2023.12.24
 

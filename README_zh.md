@@ -18,8 +18,9 @@ Demo 列表：
 1. [M120] `demo_exe`: 最简单的 demo，演示 gn 及创建自己的 exe；
 1. [M120] `demo_log`: 演示使用日志库；
 1. [M120] `demo_tracing_console`: 演示使用 Trace 输出到控制台；
-1. [M120] `demo_task_thread_pool`: 演示使用线程池 ThreadPool 位于demo_task下;
-1. [M120] `demo_task_executor`: 演示使用消息循环 SingleThreadTaskExecutor 位于demo_task下;
+1. [M120] `demo_task_thread_pool`: 演示使用线程池 ThreadPool, 位于 demo_task 下;
+1. [M120] `demo_task_executor`: 演示使用消息循环 SingleThreadTaskExecutor, 位于 demo_task 下;
+1. [M120] `demo_task_thread`: 演示在新线程中使用 task, 位于 demo_task 下;
 1. [M120] `demo_callback_(once|repeating)`: 演示 Bind&Callback 相关内容；
 1. [M120] `demo_linktest`: 演示错误的使用 gn 导致链接错误；
 1. [M120] `demo_mojo_single_process`: 演示在单进程中使用 `mojo` 库；
@@ -97,6 +98,10 @@ Demo 列表：
 - 添加 demo, 演示 `tab capture api` 的原理；
 
 ## 更新日志
+
+### 2024.6.23
+
+- 添加 demo_task_thread, 演示在新线程中使用 task, 位于 demo_task 下;
 
 ### 2023.12.24
 
